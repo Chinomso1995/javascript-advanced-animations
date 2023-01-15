@@ -1,0 +1,22 @@
+extends ../base.pug
+
+
+block content
+  .collections 
+     .collections__wrapper
+        .collections__titles 
+          each collection in collections 
+            .collections__titles__title=collection.data.title[0].text
+        .collections__gallery 
+           .collections__gallery__wrapper
+              each collection in collections
+                each product in collection.data.products 
+                   a.collections__gallery__link
+                     figure.collections__gallery__media 
+                        img.collections__gallery__media__image(alt=product.products_product.data.image.alt src=product.products_product.data.image.url) 
+
+        .collections__content 
+           each collection in collections
+            article.collections_article
+              h2.collections__article__title=collection.data.title[0].text
+              p.collections__article__description=collection.data.description         
