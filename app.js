@@ -37,8 +37,21 @@ app.get('/', (req, res) => {
   res.render('pages/home')
 })
 
-app.get('/about', (req, res) => {
-    res.render('pages/about')
+app.get('/about', async (req, res) => {
+  initApi(req).then(api => {
+    api.query(
+      Prismic.predicates.at('document.type', 'about')
+    ).then(response => {
+      const {results} = response
+      const about = results[0]?.data
+
+    
+      res.render('pages/about', {
+       about
+      })
+    })
+  })
+    
 })
 
   
