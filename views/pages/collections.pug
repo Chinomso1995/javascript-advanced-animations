@@ -5,18 +5,19 @@ block content
   .collections 
      .collections__wrapper
         .collections__titles 
-          each collection in collections 
+          each collection, index in collections 
+            .collections__titles__label=`${home.data.collection} ${index == 0 ? 'One' : index == 1 ? 'Two' : index == 2 ? 'Three' : index ==3 ? 'Four' : ''}`
             .collections__titles__title=collection.data.title[0].text
         .collections__gallery 
            .collections__gallery__wrapper
               each collection in collections
                 each product in collection.data.products 
-                   a.collections__gallery__link
+                   a.collections__gallery__link(href=Link(product.products_product))
                      figure.collections__gallery__media 
                         img.collections__gallery__media__image(alt=product.products_product.data.image.alt src=product.products_product.data.image.url) 
 
         .collections__content 
            each collection in collections
             article.collections_article
-              h2.collections__article__title=collection.data.title[0].text
+              h2.collections__article__title=`${collection.data.title[0].text} ${home.data.collection}`
               p.collections__article__description=collection.data.description         
