@@ -14,8 +14,10 @@ const PrismicDOM = require("prismic-dom");
 
 app.use(logger('dev'));
 app.use(bodyParser.json())
+app.use(errorHandler());
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(methodOverride())
+app.use(express.static(path.join(__dirname, 'public')))
 
 const handleLinkResolver = doc => {
   if(doc.type == 'product'){
@@ -53,7 +55,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(errorHandler());
+
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
 
